@@ -8,6 +8,9 @@ public class HitungbmiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(HitungbmiApplication.class, args);
+
+
+
 	}
 
 }
