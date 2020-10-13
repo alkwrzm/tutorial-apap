@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -34,5 +35,10 @@ public class ObatServiceImpl implements ObatService{
     public ObatModel getObatById(Long id) {
 
         return obatDb.findById(id).get();
+    }
+
+    @Override
+    public List<ObatModel> getObatByBentukDanKuantitas(Integer bentuk, Integer kuantitas) {
+        return obatDb.findByBentukAndKuantitas(bentuk,kuantitas);
     }
 }
