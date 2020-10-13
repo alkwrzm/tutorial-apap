@@ -38,6 +38,12 @@ public class ObatModel implements Serializable {
     @JsonIgnore
     private ResepModel resepModel;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "apotek_id", referencedColumnName = "id_apotek",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private ApotekModel apotekModel;
+
     public Long getId() {
         return id;
     }
