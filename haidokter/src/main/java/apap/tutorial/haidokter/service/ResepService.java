@@ -12,9 +12,12 @@ public interface ResepService {
     List<ResepModel> getResepList();
 
     // method untuk mendapatkan semua data resep berdasarkan nomor resep
-    ResepModel getResepByNomorResep(String noResep);
+    ResepModel getResepByNomorResep(Long noResep);
 
-    void deleteResep(ResepModel resep);
+    ResepModel updateResep(ResepModel resepModel);
 
-    void updateResep(String noResep, String catatan);
+    void deleteResep(Long noResep);
+
+    List<ResepModel> getSortedResepList();
+
 }
