@@ -8,10 +8,10 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar('View Resep')"></nav>
+<h2>Informasi Resep</h2>
 <div class="container-fluid">
     <section>
         <div class="card">
-            <div class="card-header">Informasi Resep</div>
             <div class="card-body">
                 <p th:text="'Nomor Resep: ' + ${resep.noResep}"></p>
                 <p th:text="'Nama Dokter: ' + ${resep.namaDokter}"></p>

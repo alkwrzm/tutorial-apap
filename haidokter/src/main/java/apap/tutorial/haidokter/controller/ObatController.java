@@ -99,6 +99,7 @@ public class ObatController {
         ResepModel resep = resepService.getResepByNomorResep(noResep);
 
         List<ObatModel> listObat = new ArrayList<ObatModel>();
+
         resep.setListObat(listObat);
         resep.getListObat().add(new ObatModel());
         model.addAttribute("resep", resep);
@@ -111,15 +112,16 @@ public class ObatController {
             @ModelAttribute ResepModel resep,
             Model model
     ){
-        ResepModel resep1 = resepService.getResepByNomorResep(resep.getNoResep());
-        List<ObatModel> listObat = resep1.getListObat();
-        System.out.println(listObat.size());
-        for(int i = 0; i<listObat.size(); i++){
-            listObat.get(i).setResepModel(resep);
-            obatService.addObat(listObat.get(i));
+        for (ObatModel obat : resep.getListObat()) {
+            obat.setResepModel(resep);
+            obatService.addObat(obat);
         }
-        model.addAttribute("listObat", listObat);
-        return "add-obat-multiple";
+        int jumlah = resep.getListObat().size();
+        model.addAttribute("jumlah", jumlah);
+        model.addAttribute("noResep", resep.getNoResep());
+
+        return "add-obat";
+
     }
 
     @PostMapping(value = "/obat/add-multiple/{noResep}", params = {"addRow"})
@@ -127,6 +129,9 @@ public class ObatController {
             @ModelAttribute ResepModel resep,
             Model model
     ){
+        if(resep.getListObat() == null || resep.getListObat().size() == 0){
+            resep.setListObat(new ArrayList<ObatModel>());
+        }
         resep.getListObat().add(new ObatModel());
         model.addAttribute("resep", resep);
 
