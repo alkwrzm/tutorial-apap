@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ObatDb extends JpaRepository<ObatModel, Long> {
 
     Optional<ObatModel> findById(Long id);
+
 }

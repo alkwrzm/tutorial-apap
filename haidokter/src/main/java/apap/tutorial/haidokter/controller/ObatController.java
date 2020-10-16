@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ObatController {
 
@@ -74,6 +76,38 @@ public class ObatController {
             Model model){
         ObatModel obatModel = obatService.updateObat(obat);
         model.addAttribute("id", obat.getId());
+
+        return "update-obat";
+    }
+
+    @PostMapping(value = "/obat/delete")
+    private String deleteMenuFormSubmit(@ModelAttribute ResepModel resep, Model model){
+        model.addAttribute("obatCount", resep.getListObat().size());
+        for (ObatModel obat : resep.getListObat()){
+            obatService.deleteObatById(obat.getId());
+        }
+        return "delete-obat";
+    }
+
+    @GetMapping(value = "/obat/add-multiple/{noResep}")
+    private String addMultipleObatFormPage(
+            @PathVariable Long noResep,
+            Model model
+    ){
+        ResepModel resep = resepService.getResepByNomorResep(noResep);
+        List<ObatModel> listObat = resep.getListObat();
+        model.addAttribute("obat", obat);
+
+        return "form-add-multiple-obat";
+    }
+
+
+    @PostMapping("/obat/add-multiple/")
+    private String addMultipleObatFormSubmit(
+            @ModelAttribute ObatModel obat,
+            Model model){
+        ObatModel obatModel = obatService.updateObat(obat);
+        model.addAttribute("id", obatModel.getId());
 
         return "update-obat";
     }

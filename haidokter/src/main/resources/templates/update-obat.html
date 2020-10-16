@@ -2,9 +2,18 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <title>Update Obat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<h2 th:text="'Obat berhasil diupdate.'"></h2>
+<nav th:replace="fragments/fragment :: navbar('Update Obat')"></nav>
+<section>
+    <div class="card">
+        <div class="card-body">
+            <h2 th:text="'Obat berhasil diupdate.'"></h2>
+        </div>
+    </div>
+</section>
 <a href="/resep/viewall">Kembali</a>
 </body>
 </html>
