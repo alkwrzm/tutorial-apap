@@ -2,38 +2,50 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Form Add Obat</title>
+    <title>Add Multiple Obat</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Form Add Obat')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Add Obat')"></nav>
 <section>
-    <h2>Tambah Banyak Obat</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nama</th>
-            <th scope="col">Bentuk</th>
-            <th scope="col">Kuantitas</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr >
-            <td><input type="text" name="nama"/></td>
-            <td><select name="bentuk">
-                <option value="0">Kapsul</option>
-                <option value="1">Tablet</option>
-                <option value="2">Sirup</option>
-            </select></td>
-            <td><input type="number" name="kuantitas"/></td>
-        </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/obat/add-multiple/} + ${resep.noResep}" th:object="${resep}" method="POST">
+        <table class="table">
+            <thead>
+            <th>Nama</th>
+            <th>Bentuk</th>
+            <th>Kuantitas</th>
+            <th>
+                <button class="btn btn-primary" type="submit" name="addRow">Tambah Row</button>
+            </th>
+            </thead>
+            <tbody>
+            <input type="hidden" th:field="${resep}"/>
+            <tr th:each="obat, iterationStatus : *{listObat}">
+                <td>
+                    <input type="text" th:field="*{listObat[__${iterationStatus.index}__].nama}" class="form-control"/>
+                </td>
+                <td>
+                    <select name="bentuk" th:field="*{listObat[__${iterationStatus.index}__].bentuk}"
+                            class="form-control">
+                        <option value="0">Kapsul</option>
+                        <option value="1">Table</option>
+                        <option value="2">Sirup</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" th:field="*{listObat[__${iterationStatus.index}__].kuantitas}"
+                           class="form-control"/>
+                </td>
+                <td>
+                    <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                            name="deleteRow">Hapus</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" type="submit" name="save">Submit</button>
+    </form>
 </section>
-<a th:href="@{/}" class="btn btn-warning">Kembali</a>
-<a th:href="@{/resep/view/} + ${resep.noResep}" class="btn btn-success">Lihat</a>
-<a th:href="@{/resep/change/} + ${resep.noResep}" class="btn btn-warning">Ubah</a>
-<a th:href="@{/resep/delete/} + ${resep.noResep}" class="btn btn-danger">Hapus</a>
 </body>
 </html>

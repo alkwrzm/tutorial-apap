@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -89,26 +91,58 @@ public class ObatController {
         return "delete-obat";
     }
 
-    @GetMapping(value = "/obat/add-multiple/{noResep}")
-    private String addMultipleObatFormPage(
+    @GetMapping("/obat/add-multiple/{noResep}")
+    private String addObatMultiple(
             @PathVariable Long noResep,
             Model model
     ){
         ResepModel resep = resepService.getResepByNomorResep(noResep);
-        List<ObatModel> listObat = resep.getListObat();
-        model.addAttribute("obat", obat);
+
+        List<ObatModel> listObat = new ArrayList<ObatModel>();
+        resep.setListObat(listObat);
+        resep.getListObat().add(new ObatModel());
+        model.addAttribute("resep", resep);
 
         return "form-add-multiple-obat";
     }
 
+    @PostMapping(value = "/obat/add-multiple/{noResep}", params = {"save"})
+    private String addObatMultipleSubmit(
+            @ModelAttribute ResepModel resep,
+            Model model
+    ){
+        ResepModel resep1 = resepService.getResepByNomorResep(resep.getNoResep());
+        List<ObatModel> listObat = resep1.getListObat();
+        System.out.println(listObat.size());
+        for(int i = 0; i<listObat.size(); i++){
+            listObat.get(i).setResepModel(resep);
+            obatService.addObat(listObat.get(i));
+        }
+        model.addAttribute("listObat", listObat);
+        return "add-obat-multiple";
+    }
 
-    @PostMapping("/obat/add-multiple/")
-    private String addMultipleObatFormSubmit(
-            @ModelAttribute ObatModel obat,
-            Model model){
-        ObatModel obatModel = obatService.updateObat(obat);
-        model.addAttribute("id", obatModel.getId());
+    @PostMapping(value = "/obat/add-multiple/{noResep}", params = {"addRow"})
+    private String addRowObatMultiple(
+            @ModelAttribute ResepModel resep,
+            Model model
+    ){
+        resep.getListObat().add(new ObatModel());
+        model.addAttribute("resep", resep);
 
-        return "update-obat";
+        return "form-add-multiple-obat";
+    }
+
+    @PostMapping(value = "/obat/add-multiple/{noResep}", params = {"deleteRow"})
+    private String deleteRowObatMultiple(
+            @ModelAttribute ResepModel resep,
+            final HttpServletRequest req,
+            Model model
+    ){
+        final Integer rowId = Integer.valueOf(req.getParameter("deleteRow"));
+        resep.getListObat().remove(rowId.intValue());
+
+        model.addAttribute("resep", resep);
+        return "form-add-multiple-obat";
     }
 }
