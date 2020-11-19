@@ -17,7 +17,7 @@ public interface ResepRestService {
 
     void deleteResep(Long noResep);
 
-    Mono<String> getStatus(Long noResep);
+    Mono<String> getStatus(Long noResp);
 
     Mono<ResepDetail> postStatus();
 }
