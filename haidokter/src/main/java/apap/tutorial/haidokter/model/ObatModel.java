@@ -33,9 +33,8 @@ public class ObatModel implements Serializable {
     private Integer kuantitas;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "resep_id", referencedColumnName = "no_resep",nullable = false)
+    @JoinColumn(name = "resep_id", referencedColumnName = "no_resep")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private ResepModel resepModel;
 
     public Long getId() {

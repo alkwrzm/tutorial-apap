@@ -2,6 +2,7 @@ package apap.tutorial.haidokter.restcontroller;
 
 import apap.tutorial.haidokter.model.ResepModel;
 import apap.tutorial.haidokter.rest.ResepDetail;
+import apap.tutorial.haidokter.service.APIRestService;
 import apap.tutorial.haidokter.service.ResepRestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,9 +83,6 @@ public class ResepRestController {
         return resepRestService.getStatus(noResep);
     }
 
-    @GetMapping(value = "/full")
-    private Mono<ResepDetail> postStatus(){
-        return resepRestService.postStatus();
-    }
+
 
 }
