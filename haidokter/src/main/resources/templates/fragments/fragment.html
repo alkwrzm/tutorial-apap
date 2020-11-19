@@ -47,6 +47,9 @@
         </ul>
     </div>
 </nav>
-
+<footer th:fragment="footer">
+    <p>Made with Love by Al</p>
+    <div th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></div>
+</footer>
 </body>
 </html>
