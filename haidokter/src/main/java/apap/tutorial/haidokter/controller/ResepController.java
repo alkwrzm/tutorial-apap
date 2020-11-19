@@ -77,6 +77,19 @@ public class ResepController {
 
     }
 
+    @GetMapping("/resep/view/{noResep}")
+    public String viewDetailResepPath(
+            @PathVariable Long noResep,
+            Model model){
+        ResepModel resep = resepService.getResepByNomorResep(noResep);
+
+        List<ObatModel> listObat = resep.getListObat();
+        model.addAttribute("resep", resep);
+        model.addAttribute("listObat", listObat);
+        return "view-resep";
+
+    }
+
     @RequestMapping("/resep/viewall")
     public String listResep(Model model) {
         List<ResepModel> listResep = resepService.getSortedResepList();

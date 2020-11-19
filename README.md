@@ -94,3 +94,35 @@ keseluruhan. Contohnya adalah ketika kita menghapus sebuah `parent`, maka tentu
 sesaat setelah object parent di fetch. Dalam kata lain inisialisasi ini akan melakukan 
 fetch secara bersamaan. Default fetching dari inialisasi ini adalah @OneToOne dan 
 @ManyToOne.
+
+## Tutorial 4
+1. **Jelaskan perbedaan th:include dan th:replace!**
+th:include dan th:replace merupakan sebagian contoh dari host tag, ke dua host tag berfungsi untuk mengimplementasikan bentuk fragment yang disediakan oleh Thymeleaf pada tag di html. Fragment sendiri merupakan sebuah reuseable class yang mengimplement beberapa fitur sebuah Activity. 
+
+**Perbedaan:**
+- `th:replace` disisipkan pada tag yang kita ingin tambahkan fragment-nya, th:replace akan akan menggantikan host tag dengan fragment. Dengan begitu, posisi host tag akan digantikan sepenuhnya dengan fragment, termasuk fragment tag-nya.
+
+- `th:include` disisipkan pada tag yang kita ingin tambahkan fragment-nya, th:include hanya akan menambahkan fragment pada body dari host tag, bukan menggantikan. Namun, fragment tag-nya tidak dimasukkan.
+
+**Contoh:**
+- `<div th:include="...">` contoh </div> --> konten akan ditempatkan di dalam <div> tag.
+
+- `<div th:replace="...">` contoh </div> --> tag <div> akan digantikan dengan konten yang ada.
+
+2. **Jelaskan apa fungsi dari th:object!**
+`th:object` merupakan atribut yang menyimpan command object (bentuk dari bean object), yaitu bentuk representasi dari object yang berada pada backend. Dapat diartikan bahwa th:object mereferensikan Model yang akan merepresentasikan state dari form yang dibuat. Sebagai contoh:
+
+`<form th:action="@{/resep/add}" th:object="${resep}" method="POST">`
+Pada tag form tersebut kita menyisipkan th:object="${resep}" sebagai tanda bahwa form tersebut menggunakan objek resep sebagai model untuk pengumpulan data formnya.
+
+3. **Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?**
+Secara umum, * dan $ sama-sama digunakan untuk melakukan variable expression. Namun terdapat perbedaan antar karakter tersebut. Karakter * digunakan ketika melakukan expression pada selected object, bukan keseluruhan dari variable maps. Lalu, * akan mengevaluasi atribut/variable dari `th:object`, sementara $ akan melakukan evaluasi terhadap keseluruhan atribut/variable pada `th:object`. Selama tidak ada object yang dipilih, maka * dan $ digunakan untuk hal yang sama. 
+
+4. **Bagaimana kamu menyelesaikan latihan nomor 3?**
+Saya menambahkan atribut `th:text` pada elemen HTML dengan expression `${NamaPage}` saat pembuatan fragment navbar. Lalu, saat mengimplementasikan fragment tersebut pada HTML, saya mengisi parameter pada pemanggilan fragment navbar tersebut dengan judul halaman HTML sesuai tempat pengimplementasian fragment.
+
+**Contoh:**
+- pada page:`<nav th:replace="fragments/fragment :: navbar('View Resep')"></nav>`
+- pada fragment: `<a th:text="${NamaPage}" class="nav-item nav-link active text-secondary" th:href="@{/}">`
+
+

@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Data Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<h2>Change Data Resep</h2>
+<nav th:replace="fragments/fragment :: navbar('Form Update Resep')"></nav>
+<h2>Ubah Data Resep</h2>
+<section>
+    <div class="card">
+        <div class="card-body">
 <form th:action="@{/resep/change}" th:object="${resep}" method="POST">
     <input type="hidden" th:field="*{noResep}"/>
     Nama Dokter: <br>
@@ -19,7 +25,7 @@
     <br><br><br>
     <button type="submit" value="Submit">Submit</button>
 
-</form>
-
+</form></div></div></section>
+<a th:href="@{/}">Kembali ke Home</a>
 </body>
 </html>

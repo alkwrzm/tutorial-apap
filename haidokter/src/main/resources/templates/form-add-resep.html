@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Form add resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<h2>Hello</h2>
-<h3>Tambah Resep</h3>
+<nav th:replace="fragments/fragment :: navbar('Form Add Resep')"></nav>
+<h2>Tambah Resep</h2>
+<section>
+    <div class="card">
+        <div class="card-body">
 <form th:action="@{/resep/add}" th:object="${resep}" method="POST">
     Nama Dokter:<br>
     <input type="text" name="namaDokter"/>
@@ -18,7 +23,7 @@
     <input type="text" name="catatan"/>
     <br><br>
     <button type="submit" value="Submit">Submit</button>
-</form>
-<!--    <a href="/resep/viewall">Kembali</a>-->
+</form></div></div></section>
+<a th:href="@{/}">Kembali ke Home</a>
 </body>
 </html>

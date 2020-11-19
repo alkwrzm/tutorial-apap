@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Gagal</title>
+    <meta charset="UTF-8">
+    <title>500 Internal Server Error</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Gagal Delete Obat')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Error')"></nav>
 <section>
     <div class="card">
         <div class="card-body">
-<h2 th:text="'Resep tidak bisa dihapus karena memiliki obat'"></h2>
+            <div class="container-fluid">
+                <h2>Terdapat kesalahan, permintaan tidak dapat dipenuhi.</h2>
+                <a th:href="@{/}">Kembali ke Home</a>
+            </div>
         </div></div></section>
-<a href="/resep/viewall">Kembali</a>
 </body>
 </html>
