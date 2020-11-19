@@ -21,7 +21,7 @@ public class ResepRestController {
     @Autowired
     private ResepRestService resepRestService;
 
-    @PostMapping(value="resep")
+    @PostMapping(value="/resep")
     private ResepModel createResep(@Valid @RequestBody ResepModel resep, BindingResult bindingResult) {
         if (bindingResult.hasFieldErrors()){
             throw new ResponseStatusException(
@@ -49,7 +49,21 @@ public class ResepRestController {
         }
     }
 
-    @PostMapping(value = "resep/{noResep}")
+    @GetMapping(value = "/resep/{noResep}")
+    private ResepModel retrieveResep(
+            @PathVariable(value = "noResep")
+            Long noResep){
+        try {
+            return resepRestService.getResepByNoResep(noResep);
+        } catch (NoSuchElementException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Resep with number " + String.valueOf(noResep)+ " not found!"
+
+            );
+        }
+    }
+
+    @PutMapping(value = "/resep/{noResep}")
     private ResepModel updateResep(@PathVariable(value = "noResep") Long noResep, @RequestBody ResepModel resep){
         try {
             return resepRestService.changeResep(noResep, resep);
@@ -61,8 +75,7 @@ public class ResepRestController {
     }
 
     @GetMapping(value = "/reseps")
-    private List<ResepModel> retrieveListResep() {return resepRestService.retrieveListResep();
-    }
+    private List<ResepModel> retrieveListResep() {return resepRestService.retrieveListResep(); }
 
     @GetMapping(value = "/resep/{noResep}/status")
     private Mono<String> getStatus(@PathVariable Long noResep){
