@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.inMemoryAuthentication()
                 .passwordEncoder(encoder())
-                .withUser("odading").password(encoder().encode("mengoleh"))
+                .withUser("odading").password(encoder().encode("mangoleh"))
                 .roles("USER");
     }
 }
