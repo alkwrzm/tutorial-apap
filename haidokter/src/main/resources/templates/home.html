@@ -9,6 +9,7 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar('Home')"></nav>
 <div class="container-fluid">
+    <section>
     <h2 th:text="'Hello ' + ${#httpServletRequest.remoteUser}+ ' !'">Login as</h2>
     <h2>Selamat datang di HaiDokter!</h2>
     <a th:href="@{/resep/viewall}" class="btn btn-success">Lihat semua resep</a>
@@ -25,8 +26,7 @@
                                 class="form-control"
                                 placeholder="Nomor resep"
                                 name="noResep"
-                                required
-                        />
+                                required/>
                         <div class="col">
                             <button class="btn btn-success btn-block" type="submit">
                                 Cari
@@ -37,6 +37,31 @@
             </div>
         </div>
     </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Tambah User Baru</div>
+                    <div class="card-body">
+                        <form th:action="@{/user/addUser}" method="POST">
+                            <label>User Name</label>
+                            <input type="text" name="username" class="form-control">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control">
+                            <label>User Name</label>
+                            <select name="role" class="form-control">
+                                <option selected value="">-- Pilih Role --</option>
+                                <option th:each="role: ${listRole}" th:value="${role.id}" th:text="${role.role}"></option>
+                            </select>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </body>
 </html>
