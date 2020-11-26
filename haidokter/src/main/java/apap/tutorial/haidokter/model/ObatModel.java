@@ -1,6 +1,7 @@
 package apap.tutorial.haidokter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import apap.tutorial.haidokter.model.ResepModel;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="obat")
+@JsonIgnoreProperties(value = {"resepModel"}, allowSetters = true)
 public class ObatModel implements Serializable {
 
     @Id
