@@ -40,6 +40,7 @@ Anotasi @RequestParam dan @PathVariable di MVC Spring digunakan untuk mengambil 
 ---
 
 ## Tutorial 2
+
 1. **Cobalah untuk menambahkan sebuah resep dengan mengakses link berikut: [Link](http://localhost:8080/resep/add?noResep=1&namaDokter=Papa%20APAP&namaPasien=Quanta%20Fasilkom&catatan=Semangat) Apa yang terjadi? Jelaskan mengapa hal tersebut dapat terjadi**
 Yang terjadi setelah membuka link tersebut adalah muncul Whitelabel error yang menyebutkan "error resolving template `add-resep`. Template might not exist" seperti berikut [LinkError](https://drive.google.com/file/d/1vuO9UQa5FSXcLBp_xruA-NK0BAQFXJlF/view?usp=sharing). Hal tersebut disebabkan belum adanya template yang dirujuk Controller yang menghandle permintaan link diatas. Hal tersebut dapat diperbaiki dengan membuat template "add-resep.html" pada folder `resources/templates`. 
 
@@ -56,6 +57,7 @@ Asumsikan Papa hanya mengetahui nama pasien bukan atribut lain. Maka, program be
 Saya memasukan link seperti berikut `http://localhost:8080/resep/add?noResep=2&namaDokter=Mama%20ANAP&namaPasien=Kamu&catatan=Viva%20Fasilkom`. Lalu, program menampilkan halaman dengan keterangan bahwa resep (dengan nomor resep yang diinput) berhasil ditambahkan. Setelah itu, saya membuka view list seluruh resep dan menemukan resep baru yang telah saya tambahkan tadi disana. Setelah saya mengakses link yang diberikan pada perintah, berikut halaman yang ditampilkan [Link](https://drive.google.com/file/d/1EoeouBvH2BQT0-Mi5kSimSH67OhIE1U1/view?usp=sharing).
 
 ## Tutorial 3
+
 1. **Pada class ResepDb, terdapat method findByNoResep, apakah kegunaan dari method tersebut?**
 Method `findByNoResep` berguna untuk mencari data resep dari suatu database resep berdasarkan parameter NoResep (Nomor resep) bertipe Long. Sebenarnya method ini sudah dibuat secara otomatis oleh Springboot karena saat Spring Data membuat @Repository baru, ia akan mengalanisis semua method yang telah didefinisikan sebelumnya pada interface, kemudian mencoba untuk menghasilkan query pada method tersebut.
 
@@ -96,6 +98,7 @@ fetch secara bersamaan. Default fetching dari inialisasi ini adalah @OneToOne da
 @ManyToOne.
 
 ## Tutorial 4
+
 1. **Jelaskan perbedaan th:include dan th:replace!**
 th:include dan th:replace merupakan sebagian contoh dari host tag, ke dua host tag berfungsi untuk mengimplementasikan bentuk fragment yang disediakan oleh Thymeleaf pada tag di html. Fragment sendiri merupakan sebuah reuseable class yang mengimplement beberapa fitur sebuah Activity. 
 
@@ -126,26 +129,49 @@ Saya menambahkan atribut `th:text` pada elemen HTML dengan expression `${NamaPag
 - pada fragment: `<a th:text="${NamaPage}" class="nav-item nav-link active text-secondary" th:href="@{/}">`
 
 ## Tutorial 5
-1. **Apa itu Postman? Apa kegunaannya?**
 
+1. **Apa itu Postman? Apa kegunaannya?**
 Postman merupakan aplikasi atau development tool API yang digunakan untuk melakukan build, test, dan modify API. Postman berfungsi sebagai REST Client dimana dapat digunakan untuk uji REST API. Dengan Postman, kita sebagai developer dapat mendokumentasikan, tes, mendesain, debug, menerbitkan, dan memonitor API pada satu tempat. Developer tidak harus menulis HTTP client network code, tetapi membuat test suites yang dinamakan "Collections" ketika menggunakan Postman untuk melakukan testing. Postman akan berinteraksi dengan API secara otomatis.
 
 
 2. **Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty.**
-
 - @JsonIgnoreProperties berfungsi untuk memberikan perintah pada class untuk mengabaikan properti logis yang ditentukan dalam serialisasi dan deserialisasi JSON. Sebagai contoh, ketika kita memberikan true untuk element ignoreUnknown, maka bidang JSON akan diabaikan jika data JSON memiliki bidang yang tidak mempunyai properti logis.
 
 - @JsonProperty merupakan anotasi yang memiliki fungsi untuk mengubah nama variabel. @JsonProperty memberitahu Jackson ObjectMapper untuk memetakan nama property JSON ke nama bidang Java yang diberikan anotasi.
 
 
 3. **Apa kegunaan atribut WebClient?**
-
 WebClient yang digunakan pada RestServiceImpl merupakan sebuah interface yang disediakan oleh Spring Framework yang merupakan bagian dari reactive client. WebClient memiliki fungsi sebagai poin akses utama dari web / HTTP requests. Selain itu, WebClient juga berfungsi untuk menginstansiasi sebuah akses poin URL serta mengelola request dan response atas URL tersebut.
 
 
 4. **Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?**
-
 - ResponseEntity merupakan salah satu class yang terdapat di java dan mewakili respons HTTP, termasuk header, body, dan status. Seperti @ResponseBody yang menempatkan return value ke body dari response, ResponseEntity juga memungkinkan kita untuk dapat menambahkan header dan kode status. 
 
 - BindingResult merupakan objek Spring yang menyimpan hasil dari validasi, binding, dan error atas model objek yang divalidasikan. BindingResult berisikan informasi mengenai kesalahan, seperti field yang diperlukan, adanya ketidakcocokan jenis atau kesalahan dalam melakukan pemanggilan method. BindingReslut digunakan dengan cara diletakkan setelah parameter objek validasi. 
+
+## Tutorial 6
+
+1. **Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?** 
+- Otentikasi merupakan proses untuk melakukan verifikasi apakah pengguna yang ingin login dengan username tersebut telah terdaftar di database dan berhak untuk masuk dan mengakses aplikasi. Biasanya melibatkan username dan password, tetapi dapat menyertakan metode lain yang dapat menunjukkan identitas seperti sidik jari.
+- Berikut merupakan contoh implementasi otentifikasi pada class `WebSecurityConfig`:
+@Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{auth.userDetailsService(userDetailsService).passwordEncode(encoder());}
+
+- Otorisasi merupakan proses untuk menentukan hak pengguna apakah pengguna memiliki akses ke halaman tertentu yang telah diotentifikasi dan menentukan apakah orang yang sudah diidentifikasi (diotentikasi), diperbolehkan untuk memanipulasi sumber daya tertentu. Biasanya ditentukan dengan mencari apakah orang itu memiliki akses ke sumber daya tertentu.
+- Berikut merupakan contoh implementasi otorisasi pada class `WebSecurityConfig`:
+authorizeRequests()
+.antMatchers("/css/**").permitAll()
+.antMatchers("/js/**").permitAll()
+.antMatchers("/resep/**").hasAnyAuthority("APOTEKER","ADMIN")
+
+ Sedangkan otorisasi merupakan 
+2. **Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerjanya!**
+- BCryptPasswordEncoder merupakan salah satu fungsi password hashing. BCryptPasswordEncoder bertugas untuk melakukan encrypt password user sebelum disimpan ke database. BCryptPasswordEncoder juga bertugas untuk melakukan encrypt terhadap password pada saat user ingin melakukan login. Cara kerjanya BCryptPasswordEncoder adalah saat kita membuat user baru dengan membuat username dan password baru, maka setelah kita klik 'save', maka password akan dienkripsi menggunakan fungsi BCrypt sehingga password yang terlihat pada database adalah password yang sudah dienkripsi.
+
+3. **Jelaskan secara singkat apa itu UUID beserta penggunaannya!** 
+- UUID (Universally Unique Identifier) merupakan kode identifikasi unik yang diberikan oleh sistem secara acak dengan algoritma tertentu. UUID digunakan untuk memungkinkan sistem mendistribusi/mengenerate id pengguna secara unik dengan hashing sebanyak 32 karakter secara acak yang bertujuan untuk meningkatkan keamanan data pengguna sehingga id pengguna aman dan tidak mudah untuk diretas. Mirip seperti BCrypt, bedanya kali ini adalah ID, bukan password. Saat kita membuat user baru, sistem akan otomatis melakukan pemberian kode unik yang akan terlihat pada database dengan tipe UUID. Pada tutorial ini, UUID digunakan di UserModel.java
+
+4. **Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut padahal kita sudah memiliki class UserRoleServiceImpl.java?**
+- class UserDetailsServiceImpl.java berguna untuk mengambil informasi otentikasi dan otorisasi pengguna. Tujuannya agar Spring Boot Security dapat melakukan otorisasi terhadap pengguna yang melakukan login sesuai dengan rolenya yang sudah terdaftar di database. Class tersebut mengimplementasi interface UserDetailService yang sudah disediakan oleh spring security.
+
 
