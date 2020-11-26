@@ -27,10 +27,10 @@ public class UserServiceImpl implements UserService{
                 String password = encrypt(user.getPassword());
                 user.setPassword(password);
                 userDb.save(user);
-                return "User berhasil ditambahkan";
+                return "User berhasil ditambahkan!";
             }
         }
-        return "password tidak sesuai ketentuan";
+        return "Password tidak sesuai ketentuan, mohon ulangi";
 
     }
 
@@ -58,10 +58,10 @@ public class UserServiceImpl implements UserService{
                 String password = encrypt(pass);
                 user.setPassword(password);
                 userDb.save(user);
-                return "User berhasil ditambahkan";
+                return "Password berhasil diubah!";
             }
         }
-        return "password tidak sesuai ketentuan";
+        return "Password tidak sesuai ketentuan, mohon ulangi";
     }
 
 

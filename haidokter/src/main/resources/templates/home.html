@@ -14,7 +14,12 @@
     <h2>Selamat datang di HaiDokter!</h2>
     <a th:href="@{/resep/viewall}" class="btn btn-success">Lihat semua resep</a>
     <a th:href="@{resep/add}" class="btn btn-outline-success">Tambah resep</a>
-    <hr />
+    <hr/>
+        <section>
+            <br>
+            <h2 th:text="${notif}"></h2>
+            <br>
+        </section>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -38,10 +43,8 @@
         </div>
     </div>
     </section>
-    <section>
-        <h2 th:text="${notif}"></h2>
-    </section>
     <section sec:authorize="hasAuthority('ADMIN')">
+        <br>
         <div class="row">
             <div class="col-md-6">
                 <div class="card">

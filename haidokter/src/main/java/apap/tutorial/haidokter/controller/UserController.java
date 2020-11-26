@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.result.view.RedirectView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -22,9 +21,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    private String addUserSubmit(@ModelAttribute UserModel user, Model model){
-        userService.addUser(user);
-        model.addAttribute("notif", "password tidak match, mohon input ulang");
+    private String addUserSubmit(@ModelAttribute UserModel userModel,
+                                       RedirectAttributes attributes) {
+        String a = userService.addUser(userModel);
+        attributes.addFlashAttribute("notif", a);
         return "redirect:/";
     }
 
@@ -40,6 +40,7 @@ public class UserController {
             @RequestParam(value = "passwordNew") String passwordNew,
             @RequestParam(value = "passwordNew2") String passwordNew2,
             HttpServletRequest request,
+            RedirectAttributes attributes,
             Model model
     ) {
         Principal principal = request.getUserPrincipal();
@@ -50,14 +51,14 @@ public class UserController {
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if(passwordEncoder.matches(passwordOld, user.getPassword())){
-            userService.changePassword(user, passwordNew);
+            String a = userService.changePassword(user, passwordNew);
+            attributes.addFlashAttribute("notif", a);
+            return "redirect:/user/update-password";
         }
         else{
             model.addAttribute("notif", "Password lama salah, mohon input ulang");
             return "update-password";
         }
-        return "redirect:/";
     }
-
 
 }
