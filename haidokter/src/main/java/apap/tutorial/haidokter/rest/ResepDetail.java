@@ -1,6 +1,4 @@
 package apap.tutorial.haidokter.rest;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
