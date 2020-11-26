@@ -4,7 +4,12 @@ import apap.tutorial.haidokter.model.UserModel;
 import apap.tutorial.haidokter.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
+@Service
+@Transactional
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserDb userDb;
