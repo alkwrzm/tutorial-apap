@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>View Resep</title>
@@ -26,6 +26,7 @@
     </section>
     <section>
         <h2 th:text="${title}"></h2>
+        <section sec:authorize="hasAuthority('APOTEKER')">
         <form th:action="@{/obat/delete}" th:object="${resep}" method="POST">
             <div class="mb-3">
                 <a th:href="@{/obat/add/} + ${resep.noResep}"
@@ -74,6 +75,7 @@
                 </tbody>
             </table>
         </form>
+        </section>
     </section>
 </div>
 <!--<section>-->
