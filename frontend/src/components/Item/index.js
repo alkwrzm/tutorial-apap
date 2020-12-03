@@ -22,7 +22,7 @@ export default function Item(props) {
                         <h5 className="mb-1 font-weight-bold">
                             {judul} ({tahun})
                             <input
-                                type = {checked? "checkbox":"hidden"}
+                                type = {checked ? "checkbox":"hidden"}
                                 className="ml-2"
                                 checked={checked}
                                 onChange={handleChange}
