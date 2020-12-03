@@ -23,5 +23,4 @@ export default function List({ title, items, onItemClick }) {
 const styles = {
     heading: {
         fontFamily: "courier new",
-    },
-};
+    },};
