@@ -39,8 +39,24 @@ function App() {
         emptyState = <EmptyState/>
     }
 
+    const [darkMode, setDarkMode] = useState(getInitialState());
+
+    React.useEffect(() => {
+        localStorage.setItem('variable', JSON.stringify(darkMode))
+    }, [darkMode])
+
+    function getInitialState(){
+        const saved = JSON.parse(localStorage.getItem('variable'));
+        return saved || false;
+    }
+
+    function changeTheme() {
+        setDarkMode(!darkMode);
+    }
+
 
     return (
+        <div className={darkMode ? "container-fluid dark-mode" : "container-fluid light-mode"}>
         <div className="container-fluid">
             <h1 className="text-center mt-3 mb-0">Favorites Movie App</h1>
             <p className="text-center text-secondary text-sm font-italic">
@@ -61,6 +77,13 @@ function App() {
                         </label>
                     </div>
                 </div>
+                <div className="d-flex justify-content-center align-items-center">
+                    <label className="switch">
+                        <input type="checkbox" onClick={changeTheme} />
+                        <span className="slider round"></span>
+                    </label>
+                    <h4 className="fav-margin space">Change Theme</h4>
+                </div>
                 <div className="container pt-3">
                     <div className="row">
                         <div className="col-sm">
@@ -80,6 +103,7 @@ function App() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
