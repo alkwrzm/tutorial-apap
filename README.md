@@ -177,42 +177,46 @@ authorizeRequests()
 ## **Tutorial 7**
 
 **1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan**
-- Pada latihan **pertama**, saya menambahkan validasi pada komponen Item, dimana sebelumnya, jika salah satu item dari movie list ditekan, maka state item akan menjadi checked. Oleh karena itu saya menambahkan validasi berikut pada tag input:
+- Pada latihan **pertama**, saya melakukan penambahan kode untuk validasi pada komponen Item, jika salah satu item dari movie list ditekan, maka state item akan menjadi checked. Berikut validasi yang saya tambahkan pada tag input:
 
 ```https://drive.google.com/file/d/1whMbMJ3GqDGw33eTCETI8lucjhrAdT0r/view?usp=sharing```
 
 
-- Pada latihan **kedua**, saya membuat button yang dapat menghapus semua item yang ada pada list favItems. Untuk membuatnya, yang pertama saya lakukan adalah membuat function yang dapat mengubah state favItems menjadi list kosong. Berikut adalah functionnya:
+- Pada latihan **kedua**, saya membuat button yang dapat menghapus semua item yang ada pada list favItems. Button muncul disaat pengguna mempunyai list favorite item. Pertama, saya membuat function yang dapat mengubah state favItems menjadi list kosong. Berikut adalah functionnya:
 
 ```https://drive.google.com/file/d/1Sx0_AW0k4LUIaP9eD3lk-5g-CVVlSx4H/view?usp=sharing```
 
-lalu setelah membuat function tersebut, saya membuat div yang memuat validasi bahwa button hanya ditampilkan jika terdapat item pada favItems beserta tag button yang dapat memanggil function clearFavItem setiap kali button di click. Berikut adalah div dan buttonnya:
+lalu setelah membuat function tersebut, saya membuat tag yang memuat validasi bahwa button hanya ditampilkan jika terdapat item pada favItems beserta tag button yang dapat memanggil function clearFavItem setiap kali button di click. Berikut adalah tag dan buttonnya:
 
 ```https://drive.google.com/file/d/1n0S7jd9ibr6jTWj8t_O26c8vbPwH4lW5/view?usp=sharing```
 
-- Pada latihan **ketiga**, saya membuat function baru bernama handle handleFavItemClick yang akan digunakan untuk menghandle item yang khusus terletak pada list favItems dan saya juga menghilangkan bagian kode fungsi handleItemClick yang dapat memanggil fungsi .splice() untu menghapus item dari list favItems. Berikut adalah potongan kode kedua fungsi:
+- Pada latihan **ketiga**, saya membuat function baru bernama handle handleFavClick yang akan digunakan untuk menghandle item yang khusus terletak pada list favItems dan saya juga menghilangkan bagian kode fungsi handleItemClick yang dapat memanggil fungsi .splice() untu menghapus item dari list favItems. Berikut adalah potongan kode kedua fungsi:
 
 ```https://drive.google.com/file/d/1KTDh-jWi_Yln57DFzQRPhnOnWLvXrSGz/view?usp=sharing```
 
-- Pada latihan **keempat**, saya menambahkan sebuah switch dimana setiap switch nyala, maka bagian list favItems akan ditampilkan. Untuk mencapainya saya menambahkan validasi pada tag div yang memuat list favItems, membuat function yang dapat merubah state dari textDisplay (state yang menentukan jika list favItems ditunjukkan atau tidak), dan membuat switch dengan action yang dapat memanggil fungsi yang telah dibuat. Berikut adalah potongan kode untuk fungsi yang dibuat:
+- Pada latihan **keempat**, saya menambahkan sebuah switch button bertipe checkbutton, dimana setiap switch nyala atau checklist, maka bagian list favItems akan ditampilkan. Untuk mencapainya saya menambahkan validasi pada tag yang memuat list favItems. Setelah itu, membuat function yang dapat merubah state, dan membuat switch dengan action yang dapat memanggil fungsi yang telah dibuat. Berikut adalah potongan kode untuk fungsi yang saya buat:
 
 ```https://drive.google.com/file/d/1Q9mRK903IFCruVFyoKgNnLsGeixCrNUL/view?usp=sharing```
 
-Berikut adalah potongan kode untuk switch yang dibuat:
+Berikut adalah potongan kode untuk button switch yang saya buat:
 
 ```https://drive.google.com/file/d/1uyiIUuH9BLGaahGJ6qg3gONQttw98czn/view?usp=sharing```
 
-Dan berikut adalah potongan kode untuk validasi div yang ditunjukkan atau di hide:
+Dan berikut adalah potongan kode untuk validasi pada tag yang ditunjukkan atau di hide:
 
 ```https://drive.google.com/file/d/1tH_B420cwI_tHMid6C5ie4OG6TpcdRl0/view?usp=sharing```
 
-- Terakhir, untuk latihan **kelima**, saya membuat komponen baru pada folder components yang dinamakan EmptyState. Lalu, pada komponen tersebut, saya membuat file index.js dengan isi berikut:
+- Terakhir, untuk latihan **kelima**, saya membuat komponen baru pada folder components yang dinamakan EmptyState. Setelah itu, pada komponen tersebut, saya membuat file index.js dengan isi berikut:
 
 ```https://drive.google.com/file/d/1WuQRxalRjq8yKQFO9W75Ic_GD5v7oYjn/view?usp=sharing```
 
 Lalu, saya memanggil EmptyState tersebut pada komponen List sehingga jika komponen list belum memiliki items, yang akan dirender oleh program adalah komponen state. Berikut adalah potongan kodenya:
 
 ```https://drive.google.com/file/d/1ezFAnZFNldT_0n8cjkxcrzs0j3OrDQ4i/view?usp=sharing```
+
+Berikut kumpulan screenshot jika terdapat kesalahan link diatas:
+```https://drive.google.com/drive/folders/1PgC2aLQjPvCVQwPPjGC4Om55z_hXu39X?usp=sharing```
+*penamaan foto sesuai dengan nomor*
 
 **2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?**
 - Props merupakan singkatan dari property yang setara dengan argumen pada sebuah function di bahasa pemrograman seperti java atau python. Pada tutorial ini, contoh dari props adalah item pada function handleFavItemClick = (item). Pada umumnya, props digunakan untuk melakukan komunikasi data antar component dari parent component ke child component.
@@ -237,3 +241,53 @@ Kekurangan yang saya rasakan dari react diantaranya adalah:
 - Ukuran library yang besar 
 - Sulitnya memahami flow dan juga bahasa pemrograman yang digunakan pada react jika belum pernah memiliki pengalaman programming sebelumnya sehingga butuh pelatihan yang cukup intensif
 - Hanya mencakup lapisan UI aplikasi dan tidak ada yang lain (frontend)
+
+## Tutorial 8
+
+**1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian melakukan langkah - langkah tersebut?**
+
+Saya menambahkan beberapa baris kode pada event handleCancel untuk melakukan setState dengan kode seperti berikut:
+
+![alt text](https://drive.google.com/file/d/1MgRjBOA6ds4cSv0Nw1708KqXUU9YdPVy/view?usp=sharing)
+
+Saya menggunakan langkah tersebut karena dengan mengganti state yang ada pada form tambah resep menjadi string kosong, maka akan menjadikan value dari setiap form field berikut:
+![alt text](https://drive.google.com/file/d/118Oms_07vjGZmkF4_yZjOZ1abceejf9G/view?usp=sharing)
+seperti belum diisi.
+
+
+**2. Jelaskan fungsi dari async dan await!**
+
+- async menyatakan fungsi asynchronous, yang merupakan salah satu cara untuk mengatasai masalah asynchronous pada Javascript. Async berfungsi untuk secara otomatis mengembalikan sebuah return value berupa objek dengan bentuk/tipe Promise, atau ditolak dengan uncaught errors dan dapat menggunakan keyword await.
+
+- Sementara await berfungsi untuk memberi tahu program untuk keluar secara sementara dari fungsi async dan melanjutkan programnya ketika tugas yang diberikan telah selesai. Fungsi await hanya dapat digunakan pada fungsi yang menggunakan async. 
+
+**3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 7 pada Component Lifecycle pada pertanyaan ini.**
+
+![alt text](https://drive.google.com/file/d/1wrVMySWOLjzHWn1PMHVi8-fkWrd16S1A/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/1tYl1NC_Srk6RuPC6PBZAyXz863doAUgq/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/1CSR_gZ5cGl03LU-oQ509Qjwey3ECXwHj/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/1R-E-4PVfivef-FOgkvPZV7YqQr1JveJY/view?usp=sharing)
+
+`Sempat berkoordinasi dengan asdos bahwa code tidak usah discreenshot`
+
+**4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount. Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.**
+
+**componentDidMount:**
+- merupakan salah satu component Lifecycle yang biasanya digunakan untuk melakukan pengambilan data dan menandakan tahap akhir dari mounting lifecycle, fungsi ini dipanggil setelah HTML yang dirender telah selesai melakukan loading. Fungsi ini dapat digunakan saat React ingin mengambil data dari aplikasi eksternal seperti API dari website lain atau framework JavaScript. Setelah itu kita dapat menggunakan method setState() untuk memperbarui data yang didapat dan melakukan rendering dengan data yang baru.
+- Use case: Mengambil data (API) dari website lain untuk kemudian dirender.
+
+**shouldComponentUpdate:**
+- Merupakan salah satu component Lifecycle yang biasanya digunakan untuk menentukan apakah perubahan yang terjadi di component akan ditampilkan atau tidak. Seperti memberitahu React jika output dari komponen tidak terpengaruh oleh perubahan saat ini di dalam state dan props. Dengan kata lain, memberi tahu bahwa apakah komponen harus diperbarui atau tidak, dengan return value berupa boolean true yang berarti program akan merender ulang component yang telah diubah yang secara otomatis akan terupdate atau false untuk component yang tidak merender ulang dalam arti tidak ada component yang diubah dan dengan menerima parameter nextProps dan nextState. Fungsi ini akan dijalankan setelah props atau state dari component tersebut mengalami perubahan tetapi sebelum proses rendering dimulai.
+- Use case: Ingin mengubah komponen dan melakukan rendering kembali pada setiap state yang berubah.
+
+**componentDidUpdate:**
+- merupakan salah satu component Lifecycle yang biasanya digunakan pada saat melakukan interaksi dengan environment non-React seperti browser atau API. Fungsi ini akan dijalankan Saat suatu instance di dalam suatu komponen melakukan update dan ketika HTML yang dirender telah selesai melakukan loading.
+- Use case: Melakukan update pada komponen 
+
+**componentWillReceiveProps:**
+- merupakan salah satu component Lifecylce yang memungkinkan perubahan state berdasar pada props yang sekarang dan props baru, dengan begitu kita dapat mengetahui apakah terdapat perubahan pada props atau tidak, tanpa melakukan render kembali. Dengan kata lain, fungsi tersebut dapat memberi tahu React bahwa akan ada perubahan pada komponen yang memiliki props. Fungsi ini akan dijalankan ketika terjadi perubahan pada props sebelum component di render. Method ini hanya akan dipanggil saat komponen akan menerima props.
+- Use case: Melakukan reset state. 
+
+**componentWillUnmount:**
+- merupakan salah satu component Lifecycle yang berguna ketika ada action yang berhubungan dengan cleanup diperlukan seperti melakukan pembersihan timer yang tidak valid, membatalkan permintaan jaringan, atau membersihkan langganan apa pun yang dibuat di componentDidMount. Oleh karena itu, fungsi ini akan dijalankan ketika ada component yang telah dihapus dari DOM, misalnya ketika DOM dirender ulang tanpa komponen atau pengguna berganti website atau menutup browsernya. 
+- Use case: Menghapus interval waktu fungsi berjalan.
