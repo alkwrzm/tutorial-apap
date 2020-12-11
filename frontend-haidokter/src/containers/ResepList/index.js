@@ -31,6 +31,7 @@ class ResepList extends Component {
     componentDidMount() {
         this.loadData();
     }
+
     async loadData() {
         try {
             const { data } = await APIConfig.get("/reseps");
