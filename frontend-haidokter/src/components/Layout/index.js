@@ -1,8 +1,8 @@
 import React from "react";
 const Layout = (props) => {
-    return
+    return(
     <main className="base-layout">
         {props.children}
-    </main>;
+    </main>);
 };
 export default Layout;
