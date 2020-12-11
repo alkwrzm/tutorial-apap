@@ -5,6 +5,8 @@ import APIConfig from "../../api/APIConfig";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import Backdrop from "../../components/Backdrop";
+import SearchBar from "../../components/SearchBar";
+import Obat from "../../components/Obat";
 
 class ResepList extends Component {
     constructor(props) {
@@ -17,6 +19,7 @@ class ResepList extends Component {
             namaDokter: "",
             namaPasien: "",
             catatan: "",
+            filteredResep: [],
         };
         this.handleAddResep = this.handleAddResep.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -26,12 +29,12 @@ class ResepList extends Component {
         this.handleSubmitAddResep = this.handleSubmitAddResep.bind(this);
         this.handleEditResep = this.handleEditResep.bind(this);
         this.handleSubmitEditResep = this.handleSubmitEditResep.bind(this);
+        this.findResep = this.findResep.bind(this);
     }
 
     componentDidMount() {
         this.loadData();
     }
-
     async loadData() {
         try {
             const { data } = await APIConfig.get("/reseps");
@@ -39,6 +42,17 @@ class ResepList extends Component {
         } catch (error) {
             alert("Oops terjadi masalah pada server");
             console.log(error);
+        }
+    }
+
+    async findResep(text){
+        if(text === "") this.loadData();
+        else{
+            const filtered = this.state.reseps.filter(resep => {
+                return resep.namaDokter.toLowerCase().includes(text.toLowerCase())
+            })
+            this.setState({input: text});
+            this.setState({reseps: filtered});
         }
     }
 
@@ -101,6 +115,7 @@ class ResepList extends Component {
         });
     }
 
+
     //
     //         reseps: [
     //             {
@@ -127,7 +142,6 @@ class ResepList extends Component {
     // }
     //     this.handleClickLoading = this.handleClickLoading.bind(this);
     // }
-
     handleClickLoading() {
         const currentLoading = this.state.isLoading;
         this.setState({ isLoading: !currentLoading });
@@ -140,7 +154,12 @@ class ResepList extends Component {
 
     handleCancel(event) {
         event.preventDefault();
-        this.setState({ isCreate: false, isEdit: false });
+        this.setState({
+            namaDokter: "",
+            namaPasien: "",
+            catatan: "",
+            isCreate: false,
+            isEdit: false });
     }
 
     handleChangeField(event) {
@@ -161,6 +180,8 @@ class ResepList extends Component {
                 <Button onClick={this.handleAddResep} variant="primary">
                     Add Resep
                 </Button>
+                <br></br>
+                <SearchBar handleChange={(e) => this.findResep(e.target.value)}/>
                 <div>
                     {this.state.reseps.map((resep) => (
                         <Resep
@@ -169,6 +190,7 @@ class ResepList extends Component {
                             namaDokter={resep.namaDokter}
                             namaPasien={resep.namaPasien}
                             catatan={resep.catatan}
+                            listObat={resep.listObat}
                             handleEdit={() => this.handleEditResep(resep)}
                             handleDelete={() => this.handleDeleteResep(resep.noResep)}
                         />
