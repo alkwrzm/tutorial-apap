@@ -1,6 +1,7 @@
 import React from "react";
 import Backdrop from "../Backdrop";
 import classes from "./styles.module.css";
+
 const Modal = (props) => {
     const { show, handleCloseModal, children } = props;
     return (

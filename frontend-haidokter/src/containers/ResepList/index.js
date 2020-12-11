@@ -7,6 +7,7 @@ import Modal from "../../components/Modal";
 import Backdrop from "../../components/Backdrop";
 import SearchBar from "../../components/SearchBar";
 import Obat from "../../components/Obat";
+import Pagination from "../../components/Pagination";
 
 class ResepList extends Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class ResepList extends Component {
             namaPasien: "",
             catatan: "",
             filteredResep: [],
+            page:0,
         };
         this.handleAddResep = this.handleAddResep.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -30,6 +32,7 @@ class ResepList extends Component {
         this.handleEditResep = this.handleEditResep.bind(this);
         this.handleSubmitEditResep = this.handleSubmitEditResep.bind(this);
         this.findResep = this.findResep.bind(this);
+        this.handleChangePage= this.handleChangePage.bind(this);
     }
 
     componentDidMount() {
@@ -100,6 +103,9 @@ class ResepList extends Component {
         }
     }
 
+    handleChangePage(page){
+        this.setState({page});
+    }
 
     handleAddResep() {
         this.setState({ isCreate: true });
@@ -183,7 +189,7 @@ class ResepList extends Component {
                 <br></br>
                 <SearchBar handleChange={(e) => this.findResep(e.target.value)}/>
                 <div>
-                    {this.state.reseps.map((resep) => (
+                    {this.state.reseps.slice(this.state.page*5, (this.state.page+1)*5).map((resep) => (
                         <Resep
                             key={resep.noResep}
                             noResep={resep.noResep}
@@ -242,6 +248,12 @@ class ResepList extends Component {
                         </Button>
                     </form>
                 </Modal>
+                <Pagination
+                    current={this.state.page}
+                    total={this.state.reseps.length}
+                    interval={5}
+                    handleClick={this.handleChangePage}
+                />
             </div>
         );
     }
