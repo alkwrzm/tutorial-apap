@@ -101,7 +101,6 @@ class ResepList extends Component {
         });
     }
 
-
     //
     //         reseps: [
     //             {
