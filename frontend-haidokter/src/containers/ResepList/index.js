@@ -127,6 +127,7 @@ class ResepList extends Component {
     // }
     //     this.handleClickLoading = this.handleClickLoading.bind(this);
     // }
+
     handleClickLoading() {
         const currentLoading = this.state.isLoading;
         this.setState({ isLoading: !currentLoading });
