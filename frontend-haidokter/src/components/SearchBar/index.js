@@ -6,7 +6,7 @@ const SearchBar = (props) => {
         <input
             style={barStyling}
             type="search"
-            placeholder={"Search doctor"}
+            placeholder={"Cari nama dokter"}
             onChange={props.handleChange}
         />
     );
